@@ -1,0 +1,7 @@
+{
+    "script_name": "[SERVERNAME] - Media Library",
+    "script_description": "",
+    "script_version": "v0.6 (beta)",
+    "script_guid": "F598-0F93-D997-03E4-7B08-0E9C-2112-7CD6",
+    "plextv_url": "https:\/\/plex.tv\/users\/sign_in.json"
+}

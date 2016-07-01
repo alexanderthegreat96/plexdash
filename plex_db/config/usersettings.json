@@ -1,0 +1,9 @@
+{
+    "language": "en",
+    "title": "[servername] - Media Library",
+    "admin_password": "yourpasswordhere",
+    "settings_link": 0,
+    "cache_images": 1,
+    "refresh_images": 1,
+    "debug": 0
+}

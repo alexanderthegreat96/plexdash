@@ -1,0 +1,9 @@
+{
+    "useSSL": 0,
+    "server": "SERVERIP",
+    "scheme": "http",
+    "domain": "SERVERIP",
+    "port": 32400,
+    "username": "plexuser",
+    "password": "plexpass"
+}
