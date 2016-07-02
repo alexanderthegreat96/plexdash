@@ -15,8 +15,9 @@
 <?php
 include_once("config.php");
 $command = "get_recently_added"; //command used for parsing json - DO NOT CHANGE OR ELSE THE CODE DIES
-$count = "70"; //ammount of recenly added results
-$ip = "$plexpy_url/api/v2?apikey=$apikey&cmd=$command&count=$count";
+$count = "10"; //ammount of recenly added results  - YOU DONT HAVE TO CHANGE THIS
+
+$ip = "$plexpy_url/api/v2?apikey=$apikey&cmd=$command&section_id=$section_id_movies&count=$count";
 include_once("imdb_class.php");
 $grab = file_get_contents($ip);
 $jay = json_decode($grab,true);
