@@ -54,10 +54,10 @@ include("inc/dash_config.php");
 
         function checkServer() {
             var p = new Ping();
-            var server = document.domain //plex server 
+            var server = <?php echo $server_ip;?> 
             var timeout = 4000; //Milliseconds
             var body = document.getElementsByTagName("body")[0];
-            p.ping(server+":32400", function(data) { //plex port
+            p.ping(server+":<?php echo $server_port;?>", function(data) { 
                 var serverMsg = document.getElementById( "server-status-msg" );
                 var serverImg = document.getElementById( "server-status-img" );
                 if (data < 1000){
@@ -142,8 +142,24 @@ include("inc/dash_config.php");
 		</div><!-- /row -->
 		
 		<div class="row mt centered">
-        <?php include "inc/recent_movies.php";?>
-			<?php include("inc/get_recently_added.php");?> <br/>
+
+        <?php 
+        if($enable_movies == TRUE)
+        {
+            include "inc/recent_movies.php";
+        }
+         
+        if($enable_tvshows == TRUE)
+        {
+            include "inc/recent_shows.php";
+        }
+        
+        if($enable_added == TRUE)
+        {
+            include("inc/get_recently_added.php");
+        }
+        ?>
+		 <br/>
 			<div class="col-lg-4">
 				<a href="<?php echo $server_address;?>" target="_blank">
 				<img src="assets/img/s01.png" width="180" alt="">

@@ -109,7 +109,7 @@ hr.dash {
 foreach($jay["response"]["data"]["recently_added"] as $items)
 {
 	$output_lib =$items['library_name']; //grab library name
-	$output_title = "<i>" .$items['parent_title']. "</i>"; //grab parent title
+	$output_title =  $items['parent_title']; //grab parent title
 	$output_year = $items['year'] ; //grab year
 	$output_tlt = $items['title']; //grab title(ussually for music)
   $output_type = $items['media_type'];
@@ -123,21 +123,34 @@ echo  "<td class='main_td'>". $output_lib ."</td>";
 echo "<td class='main_td'>";
 if ($output_type == "movie")
 {
-echo '<a href="grab_info.php?item='.$enc_key.'" class="one"/>'.$output_tlt.'</a>';
+echo '<img src="inc/icons/movie.png"> <a href="grab_info.php?item='.$enc_key.'" class="one"/>'.$output_tlt.'</a>';
+}
+elseif ($output_type == "season")
+{
+echo '<img src="inc/icons/tv.png"> <a href="show_info.php?title='.$output_title.'" class="one"/>'.$output_title.'</a> - '. $output_tlt;
 }
 else
 {
-  echo $output_title, $output_tlt;
+  echo "<img src='inc/icons/music.png'>".$output_title . " - ".$output_tlt;
 }
 
 echo "</td>";
-if(!empty($output_year))
+if(empty($output_year) && $output_type=="season")
 {
-	echo "<td class='main_td'>".$output_year ."</td>";
+	 $oIMDB = new IMDB($output_title);
+	 if ($oIMDB->isReady) 
+	 {
+	 	$year= $oIMDB->getYear();
+	 	echo "<td class='main_td'>".$year ."</td>";
+	 }
+	 else
+	 {
+	 	echo "<td class='main_td'>Not available</td>";
+	 }
 }
 else
 {
-	echo "<td class='main_td'>Not available</td>";
+	echo "<td class='main_td'>".$output_year."</td>";
 }
 if($output_type =="movie")//check for the output media type
 {
@@ -145,8 +158,18 @@ if($output_type =="movie")//check for the output media type
   if ($oIMDB->isReady) {
    $rating = $oIMDB->getRating();//grab imdb rating
    echo "<td class='main_td'>".$rating."</td>";
-} else {
+} 
+else {
      echo '<td class="main_td">-</td>';
+}
+
+}
+elseif($output_type == "season")
+{
+	 $oIMDB = new IMDB($output_title);
+  if ($oIMDB->isReady) {
+   $rating = $oIMDB->getRating();//grab imdb rating
+   echo "<td class='main_td'>".$rating."</td>";
 }
 }
 else
